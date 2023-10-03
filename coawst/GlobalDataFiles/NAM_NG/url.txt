@@ -1,0 +1,1 @@
+https://www.ncei.noaa.gov/thredds/ncss/model-nam218/202007/20200703/nam_218_20200703_0000_014.grb2?var=Pressure_surface&north=50&west=-80&east=-65&south=30&disableProjSubset=on&horizStride=1&time_start=2020-07-03T14%3A00%3A00Z&time_end=2020-07-03T14%3A00%3A00Z&timeStride=1&vertCoord=&addLatLon=true

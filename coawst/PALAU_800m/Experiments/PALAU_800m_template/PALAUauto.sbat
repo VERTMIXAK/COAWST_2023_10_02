@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH --partition=t2standard
+#SBATCH --ntasks=96
+#SBATCH --mail-user=jgpender@alaska.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --time=12:00:00
+#SBATCH --output=roms.%j
+source ~/.runROMSintel
+ulimit -l unlimited
+ulimit -s unlimited
+
+/bin/rm -r  netcdfOutput log 
+mkdir netcdfOutput
+
+cp  ../../InputFiles/Gridpak/PALAU_800m.nc .
+mpirun -np 96  coawst_mesoNoTides_noAVERAGES ./Apps/ocean_palau_800m.in > log
+bash /import/home/jgpender/addl_Scripts/timeROMS/getRunTime.bash >> log
+cp log netcdfOutput
+cp Apps/ocean*.in  netcdfOutput
+
+/bin/bash addAtt.bash
+
+/bin/bash rename.bash
+
+#module purge
+#module load matlab/R2013a
+#/usr/local/pkg/matlab/matlab-R2013a/bin/matlab  -nodisplay -nosplash < rvort.m
+#
+#myDate=`pwd | rev | cut -d '_' -f2-4 | rev`
+#mv surfaceTSUVZ_reduce.nc surfaceTSUVZ_$myDate.nc
+#/bin/cp surface* /import/VERTMIX/PALAU_2023/PacIOOS_Western_North_Pacific
+
+cd /import/c1/VERTMIX/jgpender/coawst/PALAU_800m/Experiments/AccumulatedData_PALAU_800m_2023/netcdfOutput
+source ~/.runROMSintel
+/bin/bash doAverages.bash

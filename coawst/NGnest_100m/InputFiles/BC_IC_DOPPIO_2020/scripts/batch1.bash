@@ -1,0 +1,10 @@
+sbatch bry0.sbat
+sbatch bry1.sbat
+sbatch bry2.sbat
+sbatch bry3.sbat
+sbatch bry4.sbat
+sbatch bry5.sbat
+sbatch bry6.sbat
+sbatch bry7.sbat
+sbatch bry8.sbat
+sbatch bry9.sbat

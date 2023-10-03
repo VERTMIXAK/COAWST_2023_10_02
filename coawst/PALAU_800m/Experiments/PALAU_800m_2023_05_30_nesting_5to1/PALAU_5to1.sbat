@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --partition=t2small
+#SBATCH --ntasks=49
+#SBATCH --mail-user=jgpender@alaska.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --time=60:00:00
+#SBATCH --output=roms.%j
+source ~/.runROMSintel
+
+ulimit -l unlimited
+ulimit -s unlimited
+
+#/bin/rm -r  netcdfOutput log 
+#mkdir netcdfOutput
+#cp  ../../InputFiles/Grid_3to1/PALAU_800m_parent.nc \ .
+
+
+mpirun -np 49  coawst_mesoNoTidesNesting ./Apps/ocean_palau_800m.in > log
+bash ~/addl_Scripts/timeROMS/getRunTime.bash >> log
+cp log netcdfOutput
+cp Apps/ocean*.in  netcdfOutput

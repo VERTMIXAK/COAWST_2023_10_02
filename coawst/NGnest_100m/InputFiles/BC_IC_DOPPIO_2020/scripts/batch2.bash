@@ -1,0 +1,10 @@
+python bry0.py
+python bry1.py
+python bry2.py
+python bry3.py
+python bry4.py
+python bry5.py
+python bry6.py
+python bry7.py
+python bry8.py
+python bry9.py
